@@ -36,21 +36,21 @@ public class PerlinNoise {
         float localY = y - top;
 
         // извлекаем градиентные векторы для всех вершин квадрата:
-        Vector topLeftGradient     = getPseudoRandomGradientVector(left,   top  );
-        Vector topRightGradient    = getPseudoRandomGradientVector(left+1, top  );
-        Vector bottomLeftGradient  = getPseudoRandomGradientVector(left,   top+1);
-        Vector bottomRightGradient = getPseudoRandomGradientVector(left+1, top+1);
+        Vector topLeftGradient = getPseudoRandomGradientVector(left, top);
+        Vector topRightGradient = getPseudoRandomGradientVector(left + 1, top);
+        Vector bottomLeftGradient = getPseudoRandomGradientVector(left, top + 1);
+        Vector bottomRightGradient = getPseudoRandomGradientVector(left+1, top + 1);
 
         // вектора от вершин квадрата до точки внутри квадрата:
-        Vector distanceToTopLeft     = new Vector(localX,   localY);
-        Vector distanceToTopRight    = new Vector(localX-1, localY);
-        Vector distanceToBottomLeft  = new Vector(localX,   localY-1);
-        Vector distanceToBottomRight = new Vector(localX-1, localY-1);
+        Vector distanceToTopLeft = new Vector(localX, localY);
+        Vector distanceToTopRight = new Vector(localX - 1, localY);
+        Vector distanceToBottomLeft = new Vector(localX, localY - 1);
+        Vector distanceToBottomRight = new Vector(localX - 1, localY - 1);
 
         // считаем скалярные произведения между которыми будем интерполировать
-        float tx1 = dot(distanceToTopLeft,     topLeftGradient);
-        float tx2 = dot(distanceToTopRight,    topRightGradient);
-        float bx1 = dot(distanceToBottomLeft,  bottomLeftGradient);
+        float tx1 = dot(distanceToTopLeft, topLeftGradient);
+        float tx2 = dot(distanceToTopRight, topRightGradient);
+        float bx1 = dot(distanceToBottomLeft, bottomLeftGradient);
         float bx2 = dot(distanceToBottomRight, bottomRightGradient);
 
         // интерполяция:
@@ -89,10 +89,8 @@ public class PerlinNoise {
 
 
     private static class Vector {
-
         float x;
         float y;
-
         Vector(float x, float y) {
             this.x = x;
             this.y = y;
